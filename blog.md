@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Blogs"
+title: "My Blogs"
 ---
 
 <!-- MathJax for LaTeX rendering -->
@@ -9,7 +9,7 @@ title: "Blogs"
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
 </script>
 
-# My Blogs
+<!-- # My Blogs -->
 
 <ul>
   {% for post in site.posts %}
