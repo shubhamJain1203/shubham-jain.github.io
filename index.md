@@ -7,7 +7,7 @@ title: Shubham Jain
 
 <!-- # Hi, I'm Shubham Jain -->
 
-I’m a Machine Learning Engineer passionate about AI, computer vision, and building smart, helpful tools.  
+Hi, I'm Shubham Jain, I’m a Machine Learning Engineer passionate about AI, computer vision, and building smart, helpful tools.  
 Welcome to my personal website where I share projects and blog posts.
 
 ---
