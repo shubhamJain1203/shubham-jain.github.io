@@ -22,6 +22,7 @@
         padding: 20px;
       }
 
+      /* Apply styles only for blog posts */
       {% if page.url contains '/posts/' %}
         main {
           max-width: 900px;
@@ -72,14 +73,7 @@
 
   <body>
     <main>
-      <h1>{{ page.title }}</h1>
-      <div class="content">
-        {{ content }}
-      </div>
+      {{ content }}
     </main>
-
-    <footer>
-      <p> Posted by <a href="https://github.com/shubhamJain1203">Shubham Jain</a></p>
-    </footer>
   </body>
 </html>
