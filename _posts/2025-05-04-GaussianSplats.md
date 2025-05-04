@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: "Gaussian Splatting: A New Era of 3D Rendering"
 date: 2025-05-04
 categories: [3D, Rendering, Computer Vision]
