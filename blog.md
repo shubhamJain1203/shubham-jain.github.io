@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "Blog"
+title: "Blogs"
 ---
 
-# My Blog
+# My Blogs
 
 <ul>
   {% for post in site.posts %}
