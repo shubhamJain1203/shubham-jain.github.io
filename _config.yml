@@ -1,3 +1,9 @@
 title: My Portfolio
 description: Personal site with portfolio and blog
 theme: minima
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  math_engine: mathjax
