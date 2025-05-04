@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "My First Post"
+title: "Gaussian Splats"
 date: 2025-05-04
 ---
 

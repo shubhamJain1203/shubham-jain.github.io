@@ -14,9 +14,9 @@ Welcome to my personal website where I share projects and blog posts.
 
 ## 🔗 Links
 
-- [📚 Blog](blog.html)
-- [💼 LinkedIn](https://www.linkedin.com/in/shubhamjain1203)
-- [📧 Contact me](mailto:shubham@example.com)
+- [Blogs](blog.html)
+- [LinkedIn](https://www.linkedin.com/in/-shubhamjain)
+- [Contact me](mailto:shubham.jain.jb@gmail.com)
 
 ---
 
