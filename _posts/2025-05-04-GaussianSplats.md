@@ -1,110 +1,100 @@
 ---
 layout: post
-title: "3D Gaussian Splatting – A New Era in Real-Time 3D Rendering"
+title: "Gaussian Splatting: A New Era of 3D Rendering"
 date: 2025-05-04
-categories: 3d-graphics rendering computer-vision
+categories: [3D, Rendering, Computer Vision]
 ---
 
-## 📸 Introduction
-
-3D Gaussian Splatting is a revolutionary rendering technique that represents 3D scenes using millions of anisotropic Gaussian ellipsoids. Unlike traditional mesh-based methods, it enables real-time rendering of photorealistic scenes with complex lighting and geometry. This approach is gaining traction in applications like AR/VR, autonomous driving, and immersive 3D content creation.
-
----
-
-## 🧠 What Is Gaussian Splatting?
-
-In Gaussian Splatting, a scene is modeled as a collection of 3D Gaussians, each defined by:
-
-- **Position** \( \mu \in \mathbb{R}^3 \)
-- **Covariance Matrix** \( \Sigma \in \mathbb{R}^{3 \times 3} \)
-- **Color** \( c \in \mathbb{R}^3 \)
-- **Opacity** \( \alpha \in [0, 1] \)
-
-Each Gaussian represents a translucent ellipsoid in 3D space. When projected onto a 2D image plane, these Gaussians are blended to reconstruct the scene from various viewpoints.
+Gaussian Splatting is a novel real-time 3D scene representation and rendering technique that moves away from traditional meshes or even implicit neural fields. Instead, it models a scene as a set of **3D Gaussians**, each with location, scale, opacity, orientation, and color. These Gaussians are then **splatted** (i.e., projected and blended) onto the 2D image plane for rendering.
 
 ---
 
-## 🧮 Mathematical Formulation
+## 🧠 Intuition
+
+Rather than modeling a scene with triangles or voxels, Gaussian Splatting places blobs (3D Gaussians) in space, each contributing color and opacity to a rendered image when projected through a camera. Because of their continuous and differentiable nature, these Gaussians allow for fast optimization and high-quality rendering.
+
+---
+
+## 📐 Mathematical Foundation
 
 A 3D Gaussian function is expressed as:
 
+{% raw %}
 $$
 G(x) = \alpha \cdot \exp\left( -\frac{1}{2}(x - \mu)^T \Sigma^{-1} (x - \mu) \right)
 $$
+{% endraw %}
 
-Here, \( \mu \) is the mean (position), \( \Sigma \) is the covariance matrix (shape and orientation), and \( \alpha \) controls the transparency.
+Here,  
+- \( \mu \) is the mean (position),  
+- \( \Sigma \) is the covariance matrix (shape and orientation),  
+- \( \alpha \) controls the transparency.
 
-To render the scene, each 3D Gaussian is projected into 2D using the camera's intrinsic and extrinsic parameters:
+---
 
+## 🎯 2D Projection
+
+To render the scene, each 3D Gaussian is projected into 2D using the camera’s intrinsic and extrinsic parameters:
+
+{% raw %}
 $$
 \mu_{2D} = K [R|t] \mu
 $$
+{% endraw %}
 
-Where:
-
-- \( K \) is the camera intrinsic matrix
-- \( R \) and \( t \) are the rotation and translation matrices
+Where:  
+- \( K \) is the camera intrinsic matrix  
+- \( R \) and \( t \) are the rotation and translation matrices  
 
 The 2D covariance \( \Sigma_{2D} \) is obtained via the Jacobian \( J \) of the projection:
 
+{% raw %}
 $$
 \Sigma_{2D} = J \Sigma J^T
 $$
+{% endraw %}
 
-This ensures accurate representation of the Gaussian's shape and orientation in the image plane.
-
----
-
-## 🖼️ Visualizing the Process
-
-Download and save these images into `assets/2025-05-04-my-blog/` and update the links accordingly in production.
-
-1. **Gaussian Splatting Process Overview**  
-![Gaussian Splatting Process](/assets/2025-05-04-my-blog/splatting-overview.png)  
-Source: [Medium – Aayushma Pant](https://aayushma1.medium.com/from-pixels-to-photorealism-the-art-of-3d-gaussian-splatting-fdcdc1a9ac21)
-
-2. **3D Gaussian Representation**  
-![3D Gaussian Representation](/assets/2025-05-04-my-blog/gaussian-representation.png)  
-Source: [PixCap Blog](https://pixcap.com/blog/gaussian-splatting)
-
-3. **Rendering Pipeline**  
-![Rendering Pipeline](/assets/2025-05-04-my-blog/rendering-pipeline.png)  
-Source: [Hugging Face Blog](https://huggingface.co/blog/gaussian-splatting)
+This ensures accurate representation of the Gaussian’s shape and orientation in the image plane.
 
 ---
 
-## ⚙️ Rendering Pipeline
+## 🎨 Rendering Pipeline
 
-The Gaussian Splatting rendering pipeline involves:
-
-1. **Structure from Motion (SfM):** Estimate camera poses and generate a sparse point cloud from input images.  
-2. **Gaussian Initialization:** Assign initial Gaussian parameters to each point.  
-3. **Optimization:** Refine Gaussian parameters by minimizing the difference between rendered and ground truth images using stochastic gradient descent.  
-4. **Rasterization:** Project Gaussians into 2D, sort by depth, and blend using alpha compositing.
-
-This process enables real-time rendering of complex scenes with high fidelity.
+1. Project Gaussians to 2D.
+2. Compute their elliptical 2D footprint.
+3. Blend them using alpha compositing with proper visibility ordering.
+4. Use additive blending to form the final image.
 
 ---
 
-## 🚀 Applications
+## 🔧 Optimization
 
-Gaussian Splatting is transforming various fields:
+The parameters of each Gaussian (position, color, opacity, scale, and orientation) are learned from posed images using gradient descent. Loss is computed between rendered views and ground truth images.
 
-- **AR/VR:** Realistic scene reconstruction for immersive experiences.  
-- **Autonomous Driving:** High-fidelity environment modeling for simulation and training.  
-- **3D Content Creation:** Efficient generation of detailed 3D models from images or videos.
+---
 
-Its ability to handle complex geometries and lighting conditions makes it a valuable tool in modern computer graphics.
+## 🖼️ Visuals
+
+Make sure to download and place the following images under `assets/2025-05-04-my-blog/` in your Jekyll project.
+
+### 📌 Overview of Gaussian Splatting  
+![Overview](../assets/2025-05-04-my-blog/gaussian-overview.png)  
+🔗 [Download](https://research.nvidia.com/labs/toronto-ai/GaussianSplatting/gaussian_splatting_overview.png)
+
+---
+
+### 📌 Pipeline Diagram  
+![Pipeline](../assets/2025-05-04-my-blog/pipeline.png)  
+🔗 [Download](https://research.nvidia.com/labs/toronto-ai/GaussianSplatting/rendering_pipeline.png)
 
 ---
 
 ## 📚 References
 
-- [Wikipedia: Gaussian Splatting](https://en.wikipedia.org/wiki/Gaussian_splatting)  
-- [Hugging Face Blog](https://huggingface.co/blog/gaussian-splatting)  
-- [The Verge](https://www.theverge.com/2025/1/19/24345491/gaussian-splats-3d-scanning-scaniverse-niantic)  
-- [PixCap Blog](https://pixcap.com/blog/gaussian-splatting)
+- [Project Page – Gaussian Splatting for Real-Time Radiance Field Rendering (SIGGRAPH 2023)](https://repo-sam.inria.fr/fungraph/gaussian-splatting/)
+- [Official NVIDIA Blog Post](https://developer.nvidia.com/blog/fast-3d-rendering-with-gaussian-splatting/)
+- [Original Paper (arXiv)](https://arxiv.org/abs/2306.00988)
 
 ---
 
-*Feel free to customize this post further or add hands-on experiments or code demos!*
+Gaussian Splatting is a key advancement toward real-time neural rendering and has already demonstrated superior quality and speed compared to NeRF-based methods. Its differentiable formulation and efficient GPU implementation make it a powerful tool in modern 3D scene understanding and generation.
